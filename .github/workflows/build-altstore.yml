@@ -1,0 +1,50 @@
+name: Build AltStore IPA
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  build-ipa:
+    name: Build unsigned IPA for AltStore
+    runs-on: macos-14
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Select latest Xcode
+        run: |
+          sudo xcode-select -s /Applications/Xcode_15.4.app/Contents/Developer
+          xcodebuild -version
+
+      - name: Build Archive
+        run: |
+          xcodebuild -project SpeedTracker.xcodeproj \
+            -scheme SpeedTracker \
+            -configuration Release \
+            -sdk iphoneos \
+            -archivePath build/SpeedTracker.xcarchive \
+            CODE_SIGNING_ALLOWED=NO \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGN_IDENTITY="" \
+            archive
+
+      - name: Package IPA for AltStore
+        run: |
+          mkdir -p build/Payload
+          cp -r build/SpeedTracker.xcarchive/Products/Applications/SpeedTracker.app build/Payload/
+          cd build
+          zip -r SpeedTracker.ipa Payload
+          cd ..
+          ls -lh build/SpeedTracker.ipa
+
+      - name: Upload IPA Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: SpeedTracker-AltStore-IPA
+          path: build/SpeedTracker.ipa
+          retention-days: 14

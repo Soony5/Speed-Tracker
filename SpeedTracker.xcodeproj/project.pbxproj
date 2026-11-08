@@ -1,0 +1,372 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A10000012CE0000100000001 /* SpeedTrackerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000012CE0000100000001 /* SpeedTrackerApp.swift */; };
+		A10000022CE0000100000001 /* Circuit.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000022CE0000100000001 /* Circuit.swift */; };
+		A10000032CE0000100000001 /* RunSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000032CE0000100000001 /* RunSession.swift */; };
+		A10000042CE0000100000001 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000042CE0000100000001 /* LocationManager.swift */; };
+		A10000052CE0000100000001 /* MotionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000052CE0000100000001 /* MotionManager.swift */; };
+		A10000062CE0000100000001 /* LapDetectionEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000062CE0000100000001 /* LapDetectionEngine.swift */; };
+		A10000072CE0000100000001 /* DataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000072CE0000100000001 /* DataStorage.swift */; };
+		A10000082CE0000100000001 /* RoadRoutingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000082CE0000100000001 /* RoadRoutingService.swift */; };
+		A10000092CE0000100000001 /* LiquidGlass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000092CE0000100000001 /* LiquidGlass.swift */; };
+		A10000102CE0000100000001 /* MiniSpeedHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000102CE0000100000001 /* MiniSpeedHUD.swift */; };
+		A10000112CE0000100000001 /* SettingsSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000112CE0000100000001 /* SettingsSheet.swift */; };
+		A10000122CE0000100000001 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000122CE0000100000001 /* HomeView.swift */; };
+		A10000132CE0000100000001 /* CircuitEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000132CE0000100000001 /* CircuitEditorView.swift */; };
+		A10000142CE0000100000001 /* TrackMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000142CE0000100000001 /* TrackMapView.swift */; };
+		A10000152CE0000100000001 /* SpeedColorHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000152CE0000100000001 /* SpeedColorHelper.swift */; };
+		A10000162CE0000100000001 /* RunDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000162CE0000100000001 /* RunDetailView.swift */; };
+		A10000172CE0000100000001 /* CircuitDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000172CE0000100000001 /* CircuitDetailView.swift */; };
+		A10000182CE0000100000001 /* ArchiveMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000182CE0000100000001 /* ArchiveMainView.swift */; };
+		A10000192CE0000100000001 /* RootTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000192CE0000100000001 /* RootTabView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		C10000012CE0000100000001 /* SpeedTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpeedTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B10000012CE0000100000001 /* SpeedTrackerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeedTrackerApp.swift; sourceTree = "<group>"; };
+		B10000022CE0000100000001 /* Circuit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Circuit.swift; sourceTree = "<group>"; };
+		B10000032CE0000100000001 /* RunSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunSession.swift; sourceTree = "<group>"; };
+		B10000042CE0000100000001 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		B10000052CE0000100000001 /* MotionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionManager.swift; sourceTree = "<group>"; };
+		B10000062CE0000100000001 /* LapDetectionEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LapDetectionEngine.swift; sourceTree = "<group>"; };
+		B10000072CE0000100000001 /* DataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStorage.swift; sourceTree = "<group>"; };
+		B10000082CE0000100000001 /* RoadRoutingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoadRoutingService.swift; sourceTree = "<group>"; };
+		B10000092CE0000100000001 /* LiquidGlass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiquidGlass.swift; sourceTree = "<group>"; };
+		B10000102CE0000100000001 /* MiniSpeedHUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniSpeedHUD.swift; sourceTree = "<group>"; };
+		B10000112CE0000100000001 /* SettingsSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSheet.swift; sourceTree = "<group>"; };
+		B10000122CE0000100000001 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		B10000132CE0000100000001 /* CircuitEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircuitEditorView.swift; sourceTree = "<group>"; };
+		B10000142CE0000100000001 /* TrackMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackMapView.swift; sourceTree = "<group>"; };
+		B10000152CE0000100000001 /* SpeedColorHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeedColorHelper.swift; sourceTree = "<group>"; };
+		B10000162CE0000100000001 /* RunDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunDetailView.swift; sourceTree = "<group>"; };
+		B10000172CE0000100000001 /* CircuitDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircuitDetailView.swift; sourceTree = "<group>"; };
+		B10000182CE0000100000001 /* ArchiveMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveMainView.swift; sourceTree = "<group>"; };
+		B10000192CE0000100000001 /* RootTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootTabView.swift; sourceTree = "<group>"; };
+		B10000202CE0000100000001 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D10000012CE0000100000001 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		E10000012CE0000100000001 = {
+			isa = PBXGroup;
+			children = (
+				E10000022CE0000100000001 /* SpeedTracker */,
+				E10000032CE0000100000001 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		E10000022CE0000100000001 /* SpeedTracker */ = {
+			isa = PBXGroup;
+			children = (
+				B10000012CE0000100000001 /* SpeedTrackerApp.swift */,
+				B10000202CE0000100000001 /* Info.plist */,
+				E10000042CE0000100000001 /* Models */,
+				E10000052CE0000100000001 /* Services */,
+				E10000062CE0000100000001 /* Views */,
+			);
+			path = SpeedTracker;
+			sourceTree = "<group>";
+		};
+		E10000032CE0000100000001 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C10000012CE0000100000001 /* SpeedTracker.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E10000042CE0000100000001 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				B10000022CE0000100000001 /* Circuit.swift */,
+				B10000032CE0000100000001 /* RunSession.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		E10000052CE0000100000001 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				B10000042CE0000100000001 /* LocationManager.swift */,
+				B10000052CE0000100000001 /* MotionManager.swift */,
+				B10000062CE0000100000001 /* LapDetectionEngine.swift */,
+				B10000072CE0000100000001 /* DataStorage.swift */,
+				B10000082CE0000100000001 /* RoadRoutingService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		E10000062CE0000100000001 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				B10000192CE0000100000001 /* RootTabView.swift */,
+				E10000072CE0000100000001 /* Home */,
+				E10000082CE0000100000001 /* Map */,
+				E10000092CE0000100000001 /* Archive */,
+				E10000102CE0000100000001 /* Components */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		E10000072CE0000100000001 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				B10000122CE0000100000001 /* HomeView.swift */,
+				B10000112CE0000100000001 /* SettingsSheet.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		E10000082CE0000100000001 /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				B10000142CE0000100000001 /* TrackMapView.swift */,
+				B10000132CE0000100000001 /* CircuitEditorView.swift */,
+			);
+			path = Map;
+			sourceTree = "<group>";
+		};
+		E10000092CE0000100000001 /* Archive */ = {
+			isa = PBXGroup;
+			children = (
+				B10000182CE0000100000001 /* ArchiveMainView.swift */,
+				B10000172CE0000100000001 /* CircuitDetailView.swift */,
+				B10000162CE0000100000001 /* RunDetailView.swift */,
+				E10000112CE0000100000001 /* Components */,
+			);
+			path = Archive;
+			sourceTree = "<group>";
+		};
+		E10000102CE0000100000001 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				B10000092CE0000100000001 /* LiquidGlass.swift */,
+				B10000102CE0000100000001 /* MiniSpeedHUD.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		E10000112CE0000100000001 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				B10000152CE0000100000001 /* SpeedColorHelper.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F10000012CE0000100000001 /* SpeedTracker */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = G10000022CE0000100000001 /* Build configuration list for PBXNativeTarget "SpeedTracker" */;
+			buildPhases = (
+				H10000012CE0000100000001 /* Sources */,
+				D10000012CE0000100000001 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SpeedTracker;
+			productName = SpeedTracker;
+			productReference = C10000012CE0000100000001 /* SpeedTracker.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		I10000012CE0000100000001 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1500;
+				LastUpgradeCheck = 1500;
+			};
+			buildConfigurationList = G10000012CE0000100000001 /* Build configuration list for PBXProject "SpeedTracker" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = it;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				it,
+				Base,
+			);
+			mainGroup = E10000012CE0000100000001;
+			productRefGroup = E10000032CE0000100000001 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F10000012CE0000100000001 /* SpeedTracker */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		H10000012CE0000100000001 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A10000012CE0000100000001 /* SpeedTrackerApp.swift in Sources */,
+				A10000022CE0000100000001 /* Circuit.swift in Sources */,
+				A10000032CE0000100000001 /* RunSession.swift in Sources */,
+				A10000042CE0000100000001 /* LocationManager.swift in Sources */,
+				A10000052CE0000100000001 /* MotionManager.swift in Sources */,
+				A10000062CE0000100000001 /* LapDetectionEngine.swift in Sources */,
+				A10000072CE0000100000001 /* DataStorage.swift in Sources */,
+				A10000082CE0000100000001 /* RoadRoutingService.swift in Sources */,
+				A10000092CE0000100000001 /* LiquidGlass.swift in Sources */,
+				A10000102CE0000100000001 /* MiniSpeedHUD.swift in Sources */,
+				A10000112CE0000100000001 /* SettingsSheet.swift in Sources */,
+				A10000122CE0000100000001 /* HomeView.swift in Sources */,
+				A10000132CE0000100000001 /* CircuitEditorView.swift in Sources */,
+				A10000142CE0000100000001 /* TrackMapView.swift in Sources */,
+				A10000152CE0000100000001 /* SpeedColorHelper.swift in Sources */,
+				A10000162CE0000100000001 /* RunDetailView.swift in Sources */,
+				A10000172CE0000100000001 /* CircuitDetailView.swift in Sources */,
+				A10000182CE0000100000001 /* ArchiveMainView.swift in Sources */,
+				A10000192CE0000100000001 /* RootTabView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		J10000012CE0000100000001 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		J10000022CE0000100000001 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_OPTIMIZATION_LEVEL = s;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		J10000032CE0000100000001 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Manual;
+				CODE_SIGNING_ALLOWED = NO;
+				CODE_SIGNING_REQUIRED = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = SpeedTracker/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pietroferrari.speedtracker;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		J10000042CE0000100000001 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Manual;
+				CODE_SIGNING_ALLOWED = NO;
+				CODE_SIGNING_REQUIRED = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = SpeedTracker/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pietroferrari.speedtracker;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		G10000012CE0000100000001 /* Build configuration list for PBXProject "SpeedTracker" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				J10000012CE0000100000001 /* Debug */,
+				J10000022CE0000100000001 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		G10000022CE0000100000001 /* Build configuration list for PBXNativeTarget "SpeedTracker" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				J10000032CE0000100000001 /* Debug */,
+				J10000042CE0000100000001 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+	};
+	rootObject = I10000012CE0000100000001 /* Project object */;
+}

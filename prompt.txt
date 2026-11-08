@@ -1,0 +1,25 @@
+[/plan](slashCommand;plan) 
+progettiamo questo progetto, creando dei todo list e piani di lavoro.
+l'idea è di fare un app per ios nativa, in swift/ swiftUi da compilare con github actions e poi installare con altstore.
+l'app serve per monitorare e tenere traccia di varie cose legate a circuiti e velocità: ora faccio un elenco.
+- visualizzare velocità istantanea in km/h in grande, usando i sensori del telefono.
+- visualizzare accelerazione istantanea, più piccolo, sotto la velocità, da impostazioni si può passsare da m/s^2 a g.
+- mappa satellitare/ solo strade con posizione dettagliata.
+- possibilità di creare dei circuiti (e salvarli) con punto di partenza, e di arrivo.
+- calcolo del tempo richiesto per fare il circuito (stima)
+- calcolo in tempo reale del tempo dal momento in cui si passa lo starting point.
+- visualizzare tutte le corse precedenti, sia i dati che "mostra sulla mappa" che lo fa vedere sulla mappa. la pista è color-coded per la velocità (verde lento, gradiente, rosso veloce)
+- si possono creare e salvare circuiti con nome e note, viene calcolata lunghezza e stima di tempo.
+- 3 sezioni: (la velocità si vede grande nella home, piccola negli altri pannelli, l'accelerazione solo in home)
+   -  home, con velocità, accelerazione, corse recenti e altre cose così, 
+   - mappa: la mappa, opzioni:
+      - satellitare
+      - contorni (solo strade)
+      - poszione in tempo reale
+   - "archivio": 
+      -sezione tutti i circuiti, con anche tempo stimato, tempo record, distanza....
+      - sezione corse recenti (salvabili con nome) mostra le corse, dicendo su che circuito sono state fatte (link interattivo che apre il circuito), quanto tempo, vel max, color-codded map in base alla velocità...
+-in alto a destra, nella home, un icona impostazioni.
+
+
+
