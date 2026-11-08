@@ -10,7 +10,7 @@ on:
 jobs:
   build-ipa:
     name: Build unsigned IPA for AltStore
-    runs-on: macos-13
+    runs-on: macos-latest
 
     steps:
       - name: Checkout repository
