@@ -78,7 +78,7 @@ public struct CircuitEditorView: View {
                     }
                     .mapStyle(.standard(elevation: .realistic))
                     .onTapGesture { screenPosition in
-                        if let coord = proxy.coordinate(from: screenPosition) {
+                        if let coord = proxy.convert(screenPosition, from: .local) {
                             handleMapTap(coord)
                         }
                     }
