@@ -49,3 +49,4 @@ Non è necessario avere Xcode sul tuo Mac. La pipeline GitHub Actions compila l'
    - Apri l'app **AltStore** sul tuo iPhone.
    - Vai su **My Apps**, tocca il `+` in alto a sinistra e seleziona `SpeedTracker.ipa`.
    - AltStore firmerà e installerà l'app con il tuo Apple ID!
+

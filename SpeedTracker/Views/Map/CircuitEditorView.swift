@@ -335,3 +335,4 @@ public struct CircuitEditorView: View {
         return String(format: "%02d:%02d min", mins, secs)
     }
 }
+

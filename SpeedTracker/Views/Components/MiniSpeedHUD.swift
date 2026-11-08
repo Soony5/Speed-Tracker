@@ -25,3 +25,4 @@ public struct MiniSpeedHUD: View {
         .liquidGlass(cornerRadius: 18)
     }
 }
+

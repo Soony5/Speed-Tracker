@@ -89,3 +89,4 @@ public struct Circuit: Identifiable, Codable, Equatable {
         self.createdAt = createdAt
     }
 }
+

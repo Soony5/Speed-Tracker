@@ -194,3 +194,4 @@ public final class LapDetectionEngine: ObservableObject {
         return session
     }
 }
+

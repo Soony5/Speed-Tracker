@@ -76,3 +76,4 @@ public final class LocationManager: NSObject, ObservableObject, CLLocationManage
         }
     }
 }
+

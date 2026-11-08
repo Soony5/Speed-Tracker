@@ -95,3 +95,4 @@ public struct RunSession: Identifiable, Codable, Equatable {
         self.telemetryPoints = telemetryPoints
     }
 }
+

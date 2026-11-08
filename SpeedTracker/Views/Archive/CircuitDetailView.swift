@@ -136,3 +136,4 @@ public struct CircuitDetailView: View {
         return String(format: "%02d:%02d.%d", mins, secs, millis)
     }
 }
+

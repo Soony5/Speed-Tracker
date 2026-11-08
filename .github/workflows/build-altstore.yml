@@ -48,3 +48,4 @@ jobs:
           name: SpeedTracker-AltStore-IPA
           path: build/SpeedTracker.ipa
           retention-days: 14
+
