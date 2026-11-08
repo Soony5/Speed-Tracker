@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A10000002CE0000100000001 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B10000212CE0000100000001 /* Assets.xcassets */; };
 		A10000012CE0000100000001 /* SpeedTrackerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000012CE0000100000001 /* SpeedTrackerApp.swift */; };
 		A10000022CE0000100000001 /* Circuit.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000022CE0000100000001 /* Circuit.swift */; };
 		A10000032CE0000100000001 /* RunSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000032CE0000100000001 /* RunSession.swift */; };
@@ -50,6 +51,7 @@
 		B10000182CE0000100000001 /* ArchiveMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveMainView.swift; sourceTree = "<group>"; };
 		B10000192CE0000100000001 /* RootTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootTabView.swift; sourceTree = "<group>"; };
 		B10000202CE0000100000001 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B10000212CE0000100000001 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +63,17 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXResourcesBuildPhase section */
+		K10000012CE0000100000001 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A10000002CE0000100000001 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXGroup section */
 		E10000012CE0000100000001 = {
@@ -76,11 +89,20 @@
 			children = (
 				B10000012CE0000100000001 /* SpeedTrackerApp.swift */,
 				B10000202CE0000100000001 /* Info.plist */,
+				E10000122CE0000100000001 /* Resources */,
 				E10000042CE0000100000001 /* Models */,
 				E10000052CE0000100000001 /* Services */,
 				E10000062CE0000100000001 /* Views */,
 			);
 			path = SpeedTracker;
+			sourceTree = "<group>";
+		};
+		E10000122CE0000100000001 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				B10000212CE0000100000001 /* Assets.xcassets */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		E10000032CE0000100000001 /* Products */ = {
@@ -179,6 +201,7 @@
 			buildPhases = (
 				H10000012CE0000100000001 /* Sources */,
 				D10000012CE0000100000001 /* Frameworks */,
+				K10000012CE0000100000001 /* Resources */,
 			);
 			buildRules = (
 			);
