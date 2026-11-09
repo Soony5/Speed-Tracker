@@ -18,8 +18,13 @@ public final class MotionManager: ObservableObject {
     
     // Accelerazione pura istantanea in unità G
     @Published public var currentAccelerationG: Double = 0.0
+    // Componente longitudinale (avanti/frenata)
+    @Published public var longitudinalG: Double = 0.0
+    // Componente laterale (curva sx/dx)
+    @Published public var lateralG: Double = 0.0
     // Accelerazione convertita in base all'unità attiva
     @Published public var displayAcceleration: Double = 0.0
+    
     @Published public var selectedUnit: AccelerationUnit = .gForce {
         didSet {
             UserDefaults.standard.set(selectedUnit.rawValue, forKey: "speed_tracker_accel_unit")
@@ -40,11 +45,12 @@ public final class MotionManager: ObservableObject {
     public func startMonitoring() {
         guard motionManager.isDeviceMotionAvailable else { return }
         
-        motionManager.deviceMotionUpdateInterval = 1.0 / 30.0 // 30Hz per fluidità
+        // Frequenza ultra-reattiva a 50Hz (ogni 20ms) per campionamento sportivo
+        motionManager.deviceMotionUpdateInterval = 1.0 / 50.0
         motionManager.startDeviceMotionUpdates(to: .main) { [weak self] motion, error in
             guard let self = self, let motion = motion, error == nil else { return }
             
-            // userAcceleration rimuove la componente della forza gravitazionale costante
+            // userAcceleration rimuove la componente della forza gravitazionale costante di 1G verso terra
             let x = motion.userAcceleration.x
             let y = motion.userAcceleration.y
             let z = motion.userAcceleration.z
@@ -52,9 +58,16 @@ public final class MotionManager: ObservableObject {
             // Grandezza del vettore di accelerazione netta (in G)
             let magnitudeG = sqrt(x * x + y * y + z * z)
             
-            // Filtro passa-basso esponenziale per smorzare rumori di vibrazione
-            let smoothedG = (self.currentAccelerationG * 0.8) + (magnitudeG * 0.2)
-            self.currentAccelerationG = smoothedG < 0.02 ? 0.0 : smoothedG
+            // Filtro reattivo adattivo: se l'accelerazione cambia rapidamente (staccata o apertura gas),
+            // segui istantaneamente (alpha 0.8), altrimenti smorza le vibrazioni del telaio/strada (alpha 0.4)
+            let diff = abs(magnitudeG - self.currentAccelerationG)
+            let alpha = diff > 0.15 ? 0.80 : 0.40
+            
+            let smoothedG = (magnitudeG * alpha) + (self.currentAccelerationG * (1.0 - alpha))
+            
+            self.longitudinalG = y // asse Y del dispositivo corrisponde ad accelerazione/decelerazione
+            self.lateralG = x      // asse X corrisponde a forze centrifughe laterali
+            self.currentAccelerationG = smoothedG < 0.01 ? 0.0 : smoothedG
             self.updateDisplayAcceleration()
         }
     }
@@ -74,4 +87,3 @@ public final class MotionManager: ObservableObject {
         }
     }
 }
-

@@ -18,11 +18,11 @@ public struct CircuitEditorView: View {
     // Tracciato calcolato strada
     @State private var calculatedRoadPoints: [CoordinatePoint] = []
     @State private var pendingSegmentPoints: [CoordinatePoint] = [] // Anteprima del segmento live
+    @State private var pendingTouchCoord: CoordinatePoint? // Coordinate dell'ultimo tap per checkpoint
     @State private var totalDistanceMeters: Double = 0.0
     @State private var estimatedTimeSeconds: Double = 0.0
     
     @State private var isCalculatingRoute: Bool = false
-    @State private var currentCenterCoord: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 45.4642, longitude: 9.1900)
     
     public init() {}
     
@@ -70,10 +70,10 @@ public struct CircuitEditorView: View {
                                 .stroke(Color.cyan, lineWidth: 5)
                         }
                         
-                        // Polyline anteprima del segmento stradale verso il centro / cursore
+                        // Polyline anteprima del segmento stradale verso il punto toccato
                         if pendingSegmentPoints.count >= 2 {
                             MapPolyline(coordinates: pendingSegmentPoints.map(\.clCoordinate))
-                                .stroke(Color.orange.opacity(0.8), style: StrokeStyle(lineWidth: 4, dash: [6, 4]))
+                                .stroke(Color.orange, style: StrokeStyle(lineWidth: 4, dash: [6, 4]))
                         }
                     }
                     .mapStyle(.standard(elevation: .realistic))
@@ -84,18 +84,6 @@ public struct CircuitEditorView: View {
                     }
                 }
                 .ignoresSafeArea(edges: .bottom)
-                
-                // MIRINO CENTRALE PER GUIDARE IL POSIZIONAMENTO
-                VStack {
-                    Spacer()
-                    Image(systemName: "plus")
-                        .font(.system(size: 20, weight: .light))
-                        .foregroundColor(.white.opacity(0.8))
-                        .padding(10)
-                        .background(Circle().fill(.ultraThinMaterial))
-                        .allowsHitTesting(false)
-                    Spacer()
-                }
                 
                 // TOP BAR DI STATO & TIPO CIRCUITO
                 VStack {
@@ -162,7 +150,11 @@ public struct CircuitEditorView: View {
         if startPoint == nil {
             return "Tocca la mappa per impostare lo START"
         } else if finishPoint == nil {
-            return "Aggiungi Checkpoint o tocca 'Imposta Fine'"
+            if pendingTouchCoord != nil {
+                return "Premi 'Aggiungi Checkpoint' o 'Fine'"
+            } else {
+                return "Tocca la mappa per il prossimo punto"
+            }
         } else {
             return "Circuito completato! Clicca Salva"
         }
@@ -172,7 +164,7 @@ public struct CircuitEditorView: View {
     private var bottomControlsCard: some View {
         LiquidGlassCard(cornerRadius: 22) {
             VStack(spacing: 12) {
-                // Dettagli nome
+                // Campo nome
                 TextField("Nome circuito (es. Passo dello Stelvio)", text: $circuitName)
                     .textFieldStyle(.plain)
                     .foregroundColor(.white)
@@ -183,8 +175,10 @@ public struct CircuitEditorView: View {
                 HStack(spacing: 10) {
                     // Tasto aggiungi Checkpoint
                     Button {
-                        if let lastPoint = lastAddedPoint {
-                            addCheckpoint(at: lastPoint.clCoordinate)
+                        if let coord = pendingTouchCoord {
+                            addCheckpoint(at: coord.clCoordinate)
+                        } else if let userCoord = locationManager.currentCoordinate {
+                            addCheckpoint(at: userCoord)
                         }
                     } label: {
                         HStack {
@@ -234,7 +228,10 @@ public struct CircuitEditorView: View {
         if startPoint == nil {
             startPoint = CoordinatePoint(clCoordinate: coord)
             calculatedRoadPoints = [CoordinatePoint(clCoordinate: coord)]
+            pendingTouchCoord = nil
         } else if finishPoint == nil {
+            pendingTouchCoord = CoordinatePoint(clCoordinate: coord)
+            
             // Calcola anteprima stradale live dal punto precedente al punto toccato
             if let prev = lastAddedPoint {
                 isCalculatingRoute = true
@@ -242,6 +239,10 @@ public struct CircuitEditorView: View {
                     if let result = await RoadRoutingService.shared.calculateRoadRoute(from: prev.clCoordinate, to: coord) {
                         await MainActor.run {
                             self.pendingSegmentPoints = result.coordinates
+                            self.isCalculatingRoute = false
+                        }
+                    } else {
+                        await MainActor.run {
                             self.isCalculatingRoute = false
                         }
                     }
@@ -253,10 +254,13 @@ public struct CircuitEditorView: View {
     private func addCheckpoint(at coord: CLLocationCoordinate2D) {
         guard finishPoint == nil else { return }
         
-        // Se c'era un'anteprima stradale in sospeso, confermala
+        // Se c'era un'anteprima stradale in sospeso per questo punto, aggiungila
         if !pendingSegmentPoints.isEmpty {
             calculatedRoadPoints.append(contentsOf: pendingSegmentPoints)
             pendingSegmentPoints.removeAll()
+        } else if let prev = lastAddedPoint {
+            // Aggiungi segmento diretto se anteprima non era pronta
+            calculatedRoadPoints.append(CoordinatePoint(clCoordinate: coord))
         }
         
         let newIndex = checkpoints.count + 1
@@ -267,15 +271,22 @@ public struct CircuitEditorView: View {
             triggerRadiusMeters: 25.0
         )
         checkpoints.append(cp)
+        pendingTouchCoord = nil
         updateTotalDistanceAndEstimate()
     }
     
     private func finalizeTrack() {
         guard let start = startPoint else { return }
         
+        // Se c'era un segmento toccato ma non ancora trasformato in checkpoint, uniscilo
+        if !pendingSegmentPoints.isEmpty {
+            calculatedRoadPoints.append(contentsOf: pendingSegmentPoints)
+            pendingSegmentPoints.removeAll()
+        }
+        
         if circuitType == .loop {
             // Chiude il cerchio tornando alla partenza con routing stradale
-            if let last = lastAddedPoint {
+            if let last = calculatedRoadPoints.last ?? lastAddedPoint {
                 isCalculatingRoute = true
                 Task {
                     if let result = await RoadRoutingService.shared.calculateRoadRoute(from: last.clCoordinate, to: start.clCoordinate) {
@@ -285,15 +296,23 @@ public struct CircuitEditorView: View {
                             self.updateTotalDistanceAndEstimate()
                             self.isCalculatingRoute = false
                         }
+                    } else {
+                        await MainActor.run {
+                            self.finishPoint = start
+                            self.updateTotalDistanceAndEstimate()
+                            self.isCalculatingRoute = false
+                        }
                     }
                 }
             }
         } else {
             // Circuito aperto
-            if let last = lastAddedPoint {
+            if let pending = pendingTouchCoord {
+                self.finishPoint = pending
+            } else if let last = calculatedRoadPoints.last ?? lastAddedPoint {
                 self.finishPoint = last
-                updateTotalDistanceAndEstimate()
             }
+            updateTotalDistanceAndEstimate()
         }
     }
     
@@ -305,7 +324,7 @@ public struct CircuitEditorView: View {
         }
         totalDistanceMeters = totalDist
         // Stima tempo a ~80 km/h (22.2 m/s)
-        estimatedTimeSeconds = totalDist / 22.2
+        estimatedTimeSeconds = totalDist > 0 ? (totalDist / 22.2) : 0.0
     }
     
     private func saveCircuit() {
@@ -335,4 +354,3 @@ public struct CircuitEditorView: View {
         return String(format: "%02d:%02d min", mins, secs)
     }
 }
-

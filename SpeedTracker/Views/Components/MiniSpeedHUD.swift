@@ -11,7 +11,7 @@ public struct MiniSpeedHUD: View {
                 .font(.system(size: 14, weight: .bold))
                 .foregroundColor(.cyan)
             
-            Text(String(format: "%.0f", locationManager.currentSpeedKmh))
+            Text(String(format: "%.1f", locationManager.currentSpeedKmh))
                 .font(.system(size: 20, weight: .black, design: .rounded))
                 .foregroundColor(.white)
                 .contentTransition(.numericText())
@@ -25,4 +25,3 @@ public struct MiniSpeedHUD: View {
         .liquidGlass(cornerRadius: 18)
     }
 }
-

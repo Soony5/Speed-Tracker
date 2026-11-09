@@ -1,6 +1,7 @@
 import Foundation
 import CoreLocation
 import Combine
+import AudioToolbox
 
 public final class LapDetectionEngine: ObservableObject {
     public static let shared = LapDetectionEngine()
@@ -35,6 +36,7 @@ public final class LapDetectionEngine: ObservableObject {
         hasPassedStart = true
         startTime = Date()
         startTimer()
+        triggerHaptic()
     }
     
     public func armCircuit(_ circuit: Circuit) {
@@ -42,12 +44,14 @@ public final class LapDetectionEngine: ObservableObject {
         activeCircuit = circuit
         isRecording = true
         hasPassedStart = false
+        triggerHaptic()
         // Il timer partirà automaticamente appena l'utente oltrepassa il geofence di partenza
     }
     
     public func stopRun(save: Bool = true) {
         isRecording = false
         stopTimer()
+        triggerHaptic()
         
         if save && !telemetryBuffer.isEmpty {
             let session = finalizeSession()
@@ -78,18 +82,21 @@ public final class LapDetectionEngine: ObservableObject {
             altitude: location.altitude
         )
         
-        // Modalità circuito con trigger geofence automatico
+        // Modalità circuito con trigger geofence dinamico
         if let circuit = activeCircuit {
             let currentCoord = CoordinatePoint(clCoordinate: location.coordinate)
+            let userRadius = UserDefaults.standard.double(forKey: "speed_tracker_gps_radius")
+            let triggerRadius = userRadius > 0 ? userRadius : 25.0
             
             if !hasPassedStart {
-                // Controllo passaggio linea di partenza (entro 25m)
+                // Controllo passaggio linea di partenza
                 let distToStart = currentCoord.distance(to: circuit.startPoint)
-                if distToStart <= 25.0 {
+                if distToStart <= triggerRadius {
                     hasPassedStart = true
                     startTime = Date()
                     lastSectorTime = startTime
                     startTimer()
+                    triggerHaptic()
                 }
             } else {
                 // Abbiamo avviato il giro: registriamo il buffer
@@ -99,7 +106,9 @@ public final class LapDetectionEngine: ObservableObject {
                 if nextCheckpointIndex < circuit.checkpoints.count {
                     let nextCp = circuit.checkpoints[nextCheckpointIndex]
                     let distToCp = currentCoord.distance(to: nextCp.coordinate)
-                    if distToCp <= nextCp.triggerRadiusMeters {
+                    let cpRadius = nextCp.triggerRadiusMeters > 0 ? nextCp.triggerRadiusMeters : triggerRadius
+                    
+                    if distToCp <= cpRadius {
                         let now = Date()
                         let splitTime = now.timeIntervalSince(lastSectorTime ?? (startTime ?? now))
                         let cumulative = now.timeIntervalSince(startTime ?? now)
@@ -115,6 +124,7 @@ public final class LapDetectionEngine: ObservableObject {
                         recordedSplits.append(split)
                         lastSectorTime = now
                         nextCheckpointIndex += 1
+                        triggerHaptic()
                     }
                 }
                 
@@ -123,8 +133,8 @@ public final class LapDetectionEngine: ObservableObject {
                 let distToFinish = currentCoord.distance(to: targetFinish)
                 
                 // Se circuito chiuso, assicurati di non triggerare subito alla partenza
-                let minElapsedToTriggerFinish: Double = circuit.circuitType == .loop ? 10.0 : 0.0
-                if distToFinish <= 25.0 && elapsedTimeSeconds > minElapsedToTriggerFinish {
+                let minElapsedToTriggerFinish: Double = circuit.circuitType == .loop ? 8.0 : 0.0
+                if distToFinish <= triggerRadius && elapsedTimeSeconds > minElapsedToTriggerFinish {
                     // Se tutti i checkpoint sono passati (o non ce ne sono)
                     if nextCheckpointIndex >= circuit.checkpoints.count {
                         hasFinished = true
@@ -138,8 +148,14 @@ public final class LapDetectionEngine: ObservableObject {
         }
     }
     
+    private func triggerHaptic() {
+        if UserDefaults.standard.bool(forKey: "speed_tracker_haptic_feedback") {
+            AudioServicesPlaySystemSound(1519) // Actuate `Peek` haptic standard
+        }
+    }
+    
     private func startTimer() {
-        timerSubscription = Timer.publish(every: 0.1, on: .main, in: .common)
+        timerSubscription = Timer.publish(every: 0.05, on: .main, in: .common) // 20Hz update timer per visualizzazione fluida
             .autoconnect()
             .sink { [weak self] _ in
                 guard let self = self, let start = self.startTime else { return }
@@ -194,4 +210,3 @@ public final class LapDetectionEngine: ObservableObject {
         return session
     }
 }
-

@@ -71,37 +71,51 @@ public struct HomeView: View {
     private var tachometerSection: some View {
         LiquidGlassCard(cornerRadius: 32) {
             VStack(spacing: 6) {
-                Text("VELOCITÀ ISTANTANEA")
-                    .font(.system(size: 11, weight: .black, design: .rounded))
-                    .tracking(2)
-                    .foregroundColor(.cyan.opacity(0.8))
-                    .padding(.top, 24)
+                HStack(spacing: 6) {
+                    Circle()
+                        .fill(locationManager.accuracy > 0 && locationManager.accuracy < 15 ? Color.green : Color.yellow)
+                        .frame(width: 8, height: 8)
+                    Text(locationManager.accuracy > 0 && locationManager.accuracy < 15 ? "GPS OTTIMALE" : "SEGNALE GPS")
+                        .font(.system(size: 10, weight: .black, design: .rounded))
+                        .tracking(1.5)
+                        .foregroundColor(.cyan.opacity(0.8))
+                }
+                .padding(.top, 20)
                 
-                // Velocità in grande
-                HStack(alignment: .lastTextBaseline, spacing: 4) {
-                    Text(String(format: "%.0f", locationManager.currentSpeedKmh))
+                // Velocità in grande con 1 decimale per precisione sportiva
+                HStack(alignment: .lastTextBaseline, spacing: 3) {
+                    let whole = Int(locationManager.currentSpeedKmh)
+                    let decimal = Int((locationManager.currentSpeedKmh.truncatingRemainder(dividingBy: 1.0)) * 10)
+                    
+                    Text("\(whole)")
                         .font(.system(size: 88, weight: .black, design: .rounded))
                         .foregroundStyle(
                             LinearGradient(
-                                colors: [.white, .white.opacity(0.9)],
+                                colors: [.white, .white.opacity(0.92)],
                                 startPoint: .top,
                                 endPoint: .bottom
                             )
                         )
                         .contentTransition(.numericText())
                     
+                    Text(".\(abs(decimal))")
+                        .font(.system(size: 34, weight: .heavy, design: .rounded))
+                        .foregroundColor(.cyan.opacity(0.85))
+                        .contentTransition(.numericText())
+                    
                     Text("km/h")
-                        .font(.system(size: 22, weight: .bold, design: .rounded))
+                        .font(.system(size: 20, weight: .bold, design: .rounded))
                         .foregroundColor(.cyan)
+                        .padding(.leading, 4)
                 }
                 
-                // Accelerazione istantanea più piccola sotto
-                HStack(spacing: 6) {
-                    Image(systemName: "arrow.up.and.down.and.sparkles")
+                // Accelerazione istantanea più piccola sotto con asse G
+                HStack(spacing: 8) {
+                    Image(systemName: "bolt.fill")
                         .font(.caption2)
                         .foregroundColor(.orange)
                     
-                    Text("ACCELERAZIONE:")
+                    Text("ACCEL:")
                         .font(.system(size: 11, weight: .bold))
                         .foregroundColor(.gray)
                     
@@ -109,12 +123,19 @@ public struct HomeView: View {
                         .font(.system(size: 16, weight: .heavy, design: .rounded))
                         .foregroundColor(.orange)
                         .contentTransition(.numericText())
+                    
+                    // Indicatore G Laterale / Centrifugo
+                    if abs(motionManager.lateralG) > 0.05 {
+                        Text(String(format: "• Lat: %.2f G", motionManager.lateralG))
+                            .font(.system(size: 11, weight: .semibold))
+                            .foregroundColor(.yellow.opacity(0.9))
+                    }
                 }
                 .padding(.horizontal, 16)
                 .padding(.vertical, 8)
                 .background(Color.white.opacity(0.06))
                 .clipShape(Capsule())
-                .padding(.bottom, 24)
+                .padding(.bottom, 22)
             }
             .frame(maxWidth: .infinity)
         }
@@ -339,4 +360,3 @@ public struct HomeView: View {
         return String(format: "%02d:%02d.%d", mins, secs, millis)
     }
 }
-
