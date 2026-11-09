@@ -44,3 +44,4 @@ public final class AppSharedDefaults {
         set { userDefaults.set(newValue.timeIntervalSince1970, forKey: "widget_last_updated") }
     }
 }
+

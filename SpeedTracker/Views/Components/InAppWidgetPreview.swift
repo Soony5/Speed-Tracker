@@ -22,7 +22,8 @@ public struct InAppWidgetPreview: View {
                 accelerationG: accel,
                 accelUnit: "G",
                 circuitName: circuitName
-            )
+            ),
+            isCompact: true
         )
         .frame(width: 160, height: 160)
         .clipShape(RoundedRectangle(cornerRadius: 26, style: .continuous))

@@ -7,3 +7,4 @@ struct SpeedTrackerWidgetBundle: WidgetBundle {
         SpeedTrackerWidget()
     }
 }
+
