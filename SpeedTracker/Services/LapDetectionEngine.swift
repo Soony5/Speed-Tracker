@@ -67,6 +67,7 @@ public final class LapDetectionEngine: ObservableObject {
         currentSpeedKmh = speedKmh
         if speedKmh > maxSpeedKmh {
             maxSpeedKmh = speedKmh
+            AppSharedDefaults.shared.maxSpeedKmh = maxSpeedKmh
         }
         
         if let last = lastLocation {

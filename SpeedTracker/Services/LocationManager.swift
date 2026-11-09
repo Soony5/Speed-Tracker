@@ -107,6 +107,10 @@ public final class LocationManager: NSObject, ObservableObject, CLLocationManage
         // Se la velocità è inferiore a 0.5 km/h con telefono fermo, azzera per evitare micro-deriva
         currentSpeedKmh = filteredSpeed < 0.5 ? 0.0 : filteredSpeed
         
+        // Sincronizza i dati per il widget di telemetria
+        AppSharedDefaults.shared.lastSpeedKmh = currentSpeedKmh
+        AppSharedDefaults.shared.lastUpdated = Date()
+        
         onLocationUpdate?(latest)
     }
     

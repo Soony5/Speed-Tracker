@@ -10,6 +10,8 @@ public struct HomeView: View {
     @State private var showingSettings = false
     @State private var selectedCircuitForRun: Circuit? = nil
     
+    @Environment(\.colorScheme) private var colorScheme
+    
     public init(selectedTab: Binding<Int>) {
         self._selectedTab = selectedTab
     }
@@ -17,15 +19,28 @@ public struct HomeView: View {
     public var body: some View {
         NavigationStack {
             ZStack {
-                // Background scuro sportivo
-                LinearGradient(
-                    colors: [
-                        Color(red: 0.05, green: 0.06, blue: 0.09),
-                        Color(red: 0.08, green: 0.10, blue: 0.16)
-                    ],
-                    startPoint: .top,
-                    endPoint: .bottom
-                )
+                // Background adattivo: Scuro sportivo o Chiaro dinamico
+                Group {
+                    if colorScheme == .dark {
+                        LinearGradient(
+                            colors: [
+                                Color(red: 0.05, green: 0.06, blue: 0.09),
+                                Color(red: 0.08, green: 0.10, blue: 0.16)
+                            ],
+                            startPoint: .top,
+                            endPoint: .bottom
+                        )
+                    } else {
+                        LinearGradient(
+                            colors: [
+                                Color(red: 0.94, green: 0.95, blue: 0.98),
+                                Color(red: 0.88, green: 0.91, blue: 0.96)
+                            ],
+                            startPoint: .top,
+                            endPoint: .bottom
+                        )
+                    }
+                }
                 .ignoresSafeArea()
                 
                 ScrollView {
@@ -35,6 +50,9 @@ public struct HomeView: View {
                         
                         // CONTROLLO SESSIONE / CRONOMETRO IN CORSO
                         sessionControlCard
+                        
+                        // ANTEPRIMA WIDGET PER LA HOME
+                        widgetPreviewSection
                         
                         // QUICK ACTION: CREA CIRCUITO
                         createCircuitShortcutCard
@@ -91,7 +109,7 @@ public struct HomeView: View {
                         .font(.system(size: 88, weight: .black, design: .rounded))
                         .foregroundStyle(
                             LinearGradient(
-                                colors: [.white, .white.opacity(0.92)],
+                                colors: colorScheme == .dark ? [.white, .white.opacity(0.92)] : [Color(red: 0.1, green: 0.12, blue: 0.18), Color(red: 0.15, green: 0.2, blue: 0.3)],
                                 startPoint: .top,
                                 endPoint: .bottom
                             )
@@ -253,6 +271,45 @@ public struct HomeView: View {
                 }
             }
             .padding(18)
+        }
+    }
+    
+    // MARK: - Shortcut Creazione Circuito
+    private var widgetPreviewSection: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            HStack {
+                Text("WIDGET TELEMETRIA (HOME SCREEN)")
+                    .font(.system(size: 11, weight: .bold))
+                    .foregroundColor(.cyan)
+                Spacer()
+                Text("Stile Liquid Glass")
+                    .font(.caption2)
+                    .foregroundColor(.gray)
+            }
+            .padding(.horizontal, 4)
+            
+            LiquidGlassCard(cornerRadius: 22) {
+                HStack(spacing: 16) {
+                    InAppWidgetPreview(
+                        speed: locationManager.currentSpeedKmh,
+                        accel: motionManager.currentAccelerationG,
+                        maxSpeed: lapEngine.maxSpeedKmh,
+                        circuitName: lapEngine.activeCircuit?.name
+                    )
+                    
+                    VStack(alignment: .leading, spacing: 6) {
+                        Text("Widget iOS Disponibile")
+                            .font(.headline)
+                            .foregroundColor(colorScheme == .dark ? .white : Color(red: 0.1, green: 0.12, blue: 0.18))
+                        
+                        Text("Tieni premuto sulla Home del tuo iPhone, tocca '+' in alto a sinistra e aggiungi 'SpeedTracker' per vedere velocità e accelerazione in tempo reale!")
+                            .font(.caption)
+                            .foregroundColor(.gray)
+                    }
+                    Spacer()
+                }
+                .padding(14)
+            }
         }
     }
     

@@ -27,6 +27,9 @@
 		A10000172CE0000100000001 /* CircuitDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000172CE0000100000001 /* CircuitDetailView.swift */; };
 		A10000182CE0000100000001 /* ArchiveMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000182CE0000100000001 /* ArchiveMainView.swift */; };
 		A10000192CE0000100000001 /* RootTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000192CE0000100000001 /* RootTabView.swift */; };
+		A10000202CE0000100000001 /* AppSharedDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000222CE0000100000001 /* AppSharedDefaults.swift */; };
+		A10000212CE0000100000001 /* SpeedTrackerWidgets.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000232CE0000100000001 /* SpeedTrackerWidgets.swift */; };
+		A10000222CE0000100000001 /* InAppWidgetPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10000242CE0000100000001 /* InAppWidgetPreview.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +55,9 @@
 		B10000192CE0000100000001 /* RootTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootTabView.swift; sourceTree = "<group>"; };
 		B10000202CE0000100000001 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B10000212CE0000100000001 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B10000222CE0000100000001 /* AppSharedDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSharedDefaults.swift; sourceTree = "<group>"; };
+		B10000232CE0000100000001 /* SpeedTrackerWidgets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeedTrackerWidgets.swift; sourceTree = "<group>"; };
+		B10000242CE0000100000001 /* InAppWidgetPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAppWidgetPreview.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,6 +136,7 @@
 				B10000062CE0000100000001 /* LapDetectionEngine.swift */,
 				B10000072CE0000100000001 /* DataStorage.swift */,
 				B10000082CE0000100000001 /* RoadRoutingService.swift */,
+				B10000222CE0000100000001 /* AppSharedDefaults.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -180,6 +187,8 @@
 			children = (
 				B10000092CE0000100000001 /* LiquidGlass.swift */,
 				B10000102CE0000100000001 /* MiniSpeedHUD.swift */,
+				B10000232CE0000100000001 /* SpeedTrackerWidgets.swift */,
+				B10000242CE0000100000001 /* InAppWidgetPreview.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -264,6 +273,9 @@
 				A10000172CE0000100000001 /* CircuitDetailView.swift in Sources */,
 				A10000182CE0000100000001 /* ArchiveMainView.swift in Sources */,
 				A10000192CE0000100000001 /* RootTabView.swift in Sources */,
+				A10000202CE0000100000001 /* AppSharedDefaults.swift in Sources */,
+				A10000212CE0000100000001 /* SpeedTrackerWidgets.swift in Sources */,
+				A10000222CE0000100000001 /* InAppWidgetPreview.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

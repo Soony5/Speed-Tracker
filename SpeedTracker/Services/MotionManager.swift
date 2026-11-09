@@ -69,6 +69,8 @@ public final class MotionManager: ObservableObject {
             self.lateralG = x      // asse X corrisponde a forze centrifughe laterali
             self.currentAccelerationG = smoothedG < 0.01 ? 0.0 : smoothedG
             self.updateDisplayAcceleration()
+            
+            AppSharedDefaults.shared.lastAccelG = self.currentAccelerationG
         }
     }
     

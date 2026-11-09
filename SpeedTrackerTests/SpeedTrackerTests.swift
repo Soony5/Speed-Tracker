@@ -75,4 +75,28 @@ final class SpeedTrackerTests: XCTestCase {
         engine.stopRun(save: false)
         XCTAssertFalse(engine.isRecording)
     }
+    
+    func testAppSharedDefaultsAndWidgetEntry() {
+        let defaults = AppSharedDefaults.shared
+        defaults.lastSpeedKmh = 120.5
+        defaults.lastAccelG = 0.95
+        defaults.maxSpeedKmh = 180.0
+        defaults.accelUnit = "G"
+        defaults.activeCircuitName = "Monza Eni Circuit"
+        
+        XCTAssertEqual(defaults.lastSpeedKmh, 120.5)
+        XCTAssertEqual(defaults.lastAccelG, 0.95)
+        XCTAssertEqual(defaults.maxSpeedKmh, 180.0)
+        XCTAssertEqual(defaults.activeCircuitName, "Monza Eni Circuit")
+        
+        let entry = TelemetryWidgetEntry(
+            speedKmh: defaults.lastSpeedKmh,
+            maxSpeedKmh: defaults.maxSpeedKmh,
+            accelerationG: defaults.lastAccelG,
+            accelUnit: defaults.accelUnit,
+            circuitName: defaults.activeCircuitName
+        )
+        XCTAssertEqual(entry.speedKmh, 120.5)
+        XCTAssertEqual(entry.accelerationG, 0.95)
+    }
 }

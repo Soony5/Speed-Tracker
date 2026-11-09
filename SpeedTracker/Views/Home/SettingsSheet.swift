@@ -6,6 +6,7 @@ public struct SettingsSheet: View {
     
     @AppStorage("speed_tracker_gps_radius") private var triggerRadius: Double = 25.0
     @AppStorage("speed_tracker_haptic_feedback") private var hapticFeedbackEnabled: Bool = true
+    @AppStorage("speed_tracker_theme_mode") private var themeMode: AppThemeMode = .system
     
     public init() {}
     
@@ -16,6 +17,37 @@ public struct SettingsSheet: View {
                 
                 ScrollView {
                     VStack(spacing: 20) {
+                        // Sezione Aspetto (Chiaro / Scuro / Sistema)
+                        VStack(alignment: .leading, spacing: 12) {
+                            Text("ASPETTO & TEMA")
+                                .font(.system(size: 12, weight: .bold))
+                                .foregroundColor(.cyan)
+                                .padding(.horizontal, 4)
+                            
+                            LiquidGlassCard(cornerRadius: 18) {
+                                HStack {
+                                    VStack(alignment: .leading, spacing: 4) {
+                                        Text("Stile Interfaccia")
+                                            .font(.headline)
+                                            .foregroundColor(.white)
+                                        Text("Adatta la grafica Liquid Glass alla Home")
+                                            .font(.caption)
+                                            .foregroundColor(.gray)
+                                    }
+                                    Spacer()
+                                    
+                                    Picker("Tema", selection: $themeMode) {
+                                        ForEach(AppThemeMode.allCases, id: \.self) { mode in
+                                            Text(mode.rawValue).tag(mode)
+                                        }
+                                    }
+                                    .pickerStyle(.segmented)
+                                    .frame(width: 170)
+                                }
+                                .padding(16)
+                            }
+                        }
+                        
                         // Sezione Sensori & Unità
                         VStack(alignment: .leading, spacing: 12) {
                             Text("TELEMETRIA & SENSORI")
